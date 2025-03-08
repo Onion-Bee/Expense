@@ -26,8 +26,10 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG", "False").lower()=="true"
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
-
+ALLOWED_HOSTS = ["https://expense-tracker-nw99.onrender.com/"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://expense-tracker-nw99.onrender.com/"
+]
 
 # Application definition
 INSTALLED_APPS = [
