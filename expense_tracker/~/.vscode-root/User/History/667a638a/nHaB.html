@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>Add Expense</title></head>
+
+
+
+
+<body class="bg-light">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Add Expense</h2>
+        <div class="card shadow p-4">
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Title</label>
+                    {{ form.title }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Amount</label>
+                    {{ form.amount }}
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Category</label>
+                    {{ form.category }}
+                </div>
+                <button type="submit" class="btn btn-success">💾 Save Expense</button>
+                <a href="{% url 'expense_list' %}" class="btn btn-secondary">🔙 Back</a>
+            </form>
+        </div>
+    </div>
+</body>
+

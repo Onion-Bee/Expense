@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expense Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-white shadow-sm">
+        <div class="container d-flex justify-content-between">
+            <a class="navbar-brand fw-bold text-primary" href="#">Expense Tracker</a>
+            
+            {% if user.is_authenticated %}
+                <span class="navbar-text text-dark">
+                    👤 Welcome, <strong>{{ user.username }}</strong>!
+                </span>
+                <a href="{% url 'logout_user' %}" class="btn btn-danger btn-sm ms-3">Logout</a>
+            {% else %}
+                <a href="{% url 'login_user' %}" class="btn btn-primary btn-sm">Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <!-- Expense Dashboard -->
+    <div class="container mt-4">
+        <h2 class="text-center text-primary">📊 Expense Dashboard</h2>
+        {% if user.is_authenticated %}
+            <p class="text-center text-muted">Hello, <strong>{{ user.username }}</strong>! Here are your expenses:</p>
+        {% endif %}
+
+        <!-- Add Expense Button -->
+        <div class="text-center mb-3">
+            <a href="{% url 'add_expense' %}" class="btn btn-success">➕ Add Expense</a>
+        </div>
+
+        <!-- Expense Table -->
+        <div class="card shadow-lg p-4">
+            <table class="table table-striped table-bordered">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Title</th>
+                        <th>Amount (₹)</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expense in expenses %}
+                    <tr>
+                        <td>{{ expense.title }}</td>
+                        <td>₹{{ expense.amount }}</td>
+                        <td>{{ expense.category }}</td>
+                        <td>{{ expense.date|date:"d M Y" }}</td>
+                        <td>
+                            <a href="{% url 'update_expense' expense.id %}" class="btn btn-sm btn-warning">✏️ Edit</a>
+                            <form action="{% url 'delete_expense' expense.id %}" method="POST" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-sm btn-danger">🗑️ Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">No expenses added yet.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

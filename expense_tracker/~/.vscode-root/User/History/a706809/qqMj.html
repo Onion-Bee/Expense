@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Expense Tracker</title></head>
+<body>
+    <h1>Expense Tracker</h1>
+    <a href="{% url 'add_expense' %}">Add Expense</a>
+    <ul>
+        {% for expense in expenses %}
+            <li>
+                {{ expense.title }} - ₹{{ expense.amount }} ({{ expense.category }}) 
+                - <strong>{{ expense.date }}</strong>  <!-- Display the date -->
+                <a href="{% url 'update_expense' expense.id %}">Edit</a>
+                <form action="{% url 'delete_expense' expense.id %}" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

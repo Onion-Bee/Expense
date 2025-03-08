@@ -1,0 +1,8 @@
+username : root
+passwd : OnionBee
+
+
+postgreSQL
+
+myuser
+mypassword

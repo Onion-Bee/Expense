@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-light bg-white shadow-sm">
+    <div class="container d-flex justify-content-between">
+      <a class="navbar-brand fw-bold text-primary" href="#">Expense Tracker</a>
+
+      {% if user.is_authenticated %}
+        <span class="navbar-text text-dark">
+          👤 Welcome, <strong>{{ user.username }}</strong>!
+        </span>
+        <a href="{% url 'logout_user' %}" class="btn btn-danger btn-sm ms-3">Logout</a>
+      {% else %}
+        <a href="{% url 'login_user' %}" class="btn btn-primary btn-sm">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <h2 class="text-center">Expense Tracker Dashboard</h2>
+
+    <!-- Add Transaction Button -->
+    <div class="text-center mb-3">
+      <a href="{% url 'add_transaction' %}" class="btn btn-success">➕ Add Transaction</a>
+      <a href="{% url 'view_graph' %}" class="btn btn-info ms-2">📊 View Graph</a>
+    </div>
+
+    <!-- Financial Summary -->
+    <div class="card shadow-lg p-4 mb-4">
+      <h4 class="text-center">💰 Financial Summary</h4>
+      <p class="text-center" style="color: green; font-size: 1.2rem;">
+        <strong>Total Income: ₹{{ total_income }}</strong>
+      </p>
+      <p class="text-center" style="color: red; font-size: 1.2rem;">
+        <strong>Total Expense: ₹{{ total_expense }}</strong>
+      </p>
+      <p class="text-center fw-bold" style="font-size: 1.4rem; 
+            color: {% if net_balance >= 0 %} green {% else %} red {% endif %};">
+        Net Worth: ₹{{ net_balance }}
+      </p>
+    </div>
+
+    <!-- Transactions Table -->
+    <div class="card shadow-lg p-4">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Title</th>
+            <th>Amount (₹)</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for transaction in transactions %}
+          <tr>
+            <td>{{ transaction.title }}</td>
+            <td>₹{{ transaction.amount }}</td>
+            <td>
+              <span class="badge {% if transaction.transaction_type == 'income' %}bg-success{% else %}bg-danger{% endif %}">
+                {{ transaction.transaction_type|title }}
+              </span>
+            </td>
+            <td>{{ transaction.category }}</td>
+            <td>{{ transaction.date|date:"d M Y" }}</td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5" class="text-center text-muted">No transactions found.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+</html>

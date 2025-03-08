@@ -1,0 +1,8 @@
+# created by virtualenv automatically
+venv/
+env/
+virtualenv/
+__pycache__/
+db.sqlite3  # If you were using SQLite before
+*.pyc
+*.log
