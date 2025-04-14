@@ -9,11 +9,7 @@
                 "folderUri": "file:///root/Desktop/Environments/Expense"
             }
         ],
-        "emptyWindows": [
-            {
-                "backupFolder": "1741360611235"
-            }
-        ]
+        "emptyWindows": []
     },
     "profileAssociations": {
         "workspaces": {
@@ -1718,7 +1714,7 @@
         "layoutInfo": {
             "sideBarSide": "left",
             "editorPartMinWidth": 220,
-            "titleBarHeight": 0,
+            "titleBarHeight": 35,
             "activityBarWidth": 48,
             "sideBarWidth": 300,
             "auxiliarySideBarWidth": 0,
@@ -1733,12 +1729,13 @@
             "backupPath": "/root/Desktop/Environments/Expense/expense_tracker/~/.vscode-root/Backups/75a986cc9d888f50c8819df950c3e25c",
             "uiState": {
                 "mode": 0,
-                "x": 5,
-                "y": 66,
-                "width": 1910,
-                "height": 1009
+                "x": 0,
+                "y": 35,
+                "width": 1920,
+                "height": 1045
             }
         },
         "openedWindows": []
-    }
+    },
+    "windowControlHeight": 35
 }

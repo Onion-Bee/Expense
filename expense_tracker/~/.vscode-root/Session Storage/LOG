@@ -1,2 +1,3 @@
-2025/03/08-00:12:35.782 5084 Creating DB /root/Desktop/Environments/Expense/expense_tracker/~/.vscode-root/Session Storage since it was missing.
-2025/03/08-00:12:35.796 5084 Reusing MANIFEST /root/Desktop/Environments/Expense/expense_tracker/~/.vscode-root/Session Storage/MANIFEST-000001
+2025/04/13-21:15:54.834 614e Reusing MANIFEST /root/Desktop/Environments/Expense/expense_tracker/~/.vscode-root/Session Storage/MANIFEST-000001
+2025/04/13-21:15:54.834 614e Recovering log #3
+2025/04/13-21:15:54.835 614e Reusing old log /root/Desktop/Environments/Expense/expense_tracker/~/.vscode-root/Session Storage/000003.log 
